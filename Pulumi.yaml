@@ -1,0 +1,14 @@
+name: pulumi-budget-alert
+runtime: python
+description: >
+  UncoverTheStack — Deploy It #5
+  Sets up an AWS Budget with email alerts at 80%, 100% (actual) and 100% (forecasted).
+  No console clicking required.
+
+config:
+  monthly_budget_usd:
+    description: Monthly spend limit in USD (e.g. 50)
+    type: string
+  alert_email:
+    description: Email address to receive budget alerts
+    type: string
