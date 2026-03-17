@@ -1,7 +1,5 @@
 # 💸 AWS Budget Alert System — Pulumi Python Template
 
-
-
 ## What does this do?
 
 This template sets up an automatic email alert system that tells you when your AWS spending is getting too high — before you get a surprise bill.
@@ -325,22 +323,3 @@ Your Pulumi session may have expired. Run `pulumi login` again to refresh it.
 
 **Alerts not arriving in your inbox**
 You haven't confirmed the subscription email. Check your spam folder and click the confirmation link.
-
----
-
-## Part of the Deploy It series
-
-| # | Template | AWS Services |
-|---|---|---|
-| 1 | Static Site Host | S3 + CloudFront |
-| 2 | Scheduled Job Runner | Lambda + EventBridge |
-| 3 | Serverless API | API Gateway + Lambda |
-| 4 | File Upload Pipeline | S3 + SQS + Lambda |
-| **5** | **Budget Alert System** ← you are here | **Budgets + SNS** |
-| 6 | Secure File Storage | S3 + IAM + Lifecycle |
-| 7 | App + Database Starter | RDS + Secrets Manager + VPC |
-| 8 | Log & Alert Monitor | CloudWatch + SNS + Lambda |
-
----
-
-Made with ☁️ by [UncoverTheStack](https://linkedin.com/in/victor-cornelius) — *Simple to Scale*
