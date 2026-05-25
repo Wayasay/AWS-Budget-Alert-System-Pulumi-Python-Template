@@ -11,7 +11,7 @@ Once deployed, you will receive an email when:
 
 All of this is created with one command. No clicking around the AWS console.
 
-## Before you start — what you need to install
+## Before you start what you need to install
 
 You need 5 things before you can use this template. **The order matters** each step builds on the last. If you skip ahead and run `pulumi up` before completing the steps, you will get errors.
 
