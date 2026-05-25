@@ -1,21 +1,19 @@
-# 💸 AWS Budget Alert System — Pulumi Python Template
+# 💸 AWS Budget Alert System Pulumi Python Template
 
 ## What does this do?
 
 This template sets up an automatic email alert system that tells you when your AWS spending is getting too high — before you get a surprise bill.
 
 Once deployed, you will receive an email when:
-- You've spent **80%** of your monthly budget (early warning — time to investigate)
+- You've spent **80%** of your monthly budget (early warning time to investigate)
 - You've spent **100%** of your monthly budget (you've hit the limit)
 - AWS **predicts** you'll exceed your budget before the month ends (forward warning)
 
 All of this is created with one command. No clicking around the AWS console.
 
----
-
 ## Before you start — what you need to install
 
-You need 5 things before you can use this template. **The order matters** — each step builds on the last. If you skip ahead and run `pulumi up` before completing the steps, you will get errors.
+You need 5 things before you can use this template. **The order matters** each step builds on the last. If you skip ahead and run `pulumi up` before completing the steps, you will get errors.
 
 Here is why the order matters:
 
@@ -25,9 +23,8 @@ pulumi login     →  you register with the locksmith
 pulumi up        →  the locksmith picks up the key and opens the door
 ```
 
-Pulumi doesn't have its own AWS login. It borrows the credentials that `aws configure` already stored on your machine. So AWS access has to be set up first — Pulumi picks it up automatically when you deploy. You only have to do all of this once. After that, every future template you use will just work.
+Pulumi doesn't have its own AWS login. It borrows the credentials that `aws configure` already stored on your machine. So AWS access has to be set up first Pulumi picks it up automatically when you deploy. You only have to do all of this once. After that, every future template you use will just work.
 
----
 
 ### ✅ Step 1 — Create a free AWS account
 
@@ -35,14 +32,13 @@ If you don't have one already:
 
 1. Go to [https://aws.amazon.com](https://aws.amazon.com)
 2. Click **Create an AWS account**
-3. Follow the sign-up steps (you'll need a credit card, but this template costs nothing to run — AWS Budgets and SNS email alerts are both free tier)
+3. Follow the sign-up steps (you'll need a credit card, but this template costs nothing to run AWS Budgets and SNS email alerts are both free tier)
 4. Or sign in if you already have one
 
----
 
 ### ✅ Step 2 — Create AWS Access Keys
 
-AWS needs to verify it's you making changes from your computer. Access keys are how it does that — think of them as a username and password specifically for your terminal.
+AWS needs to verify it's you making changes from your computer. Access keys are how it does that think of them as a username and password specifically for your terminal.
 
 1. Log into the [AWS Console](https://console.aws.amazon.com)
 2. Click your name in the top right → **Security credentials**
@@ -53,11 +49,9 @@ AWS needs to verify it's you making changes from your computer. Access keys are 
 
 > ⚠️ Never share these keys or commit them to GitHub. Anyone who has them has full access to your AWS account.
 
----
+### ✅ Step 3 Install and configure the AWS CLI
 
-### ✅ Step 3 — Install and configure the AWS CLI
-
-The AWS CLI is a tool that lets your computer communicate with AWS. This is the step where you hand your access keys to your machine — and where Pulumi will quietly pick them up later when it needs to deploy.
+The AWS CLI is a tool that lets your computer communicate with AWS. This is the step where you hand your access keys to your machine and where Pulumi will quietly pick them up later when it needs to deploy.
 
 **Install it:**
 
@@ -82,7 +76,7 @@ Default region name:   us-east-1
 Default output format: just press Enter to skip
 ```
 
-When you run this, the AWS CLI writes your credentials to a file at `~/.aws/credentials` on your machine. This file stays there permanently — you only need to do this once. Every time you run `pulumi up` in the future, Pulumi reads your credentials from this file automatically. You won't be asked to log into AWS again.
+When you run this, the AWS CLI writes your credentials to a file at `~/.aws/credentials` on your machine. This file stays there permanently you only need to do this once. Every time you run `pulumi up` in the future, Pulumi reads your credentials from this file automatically. You won't be asked to log into AWS again.
 
 **Verify it worked:**
 
@@ -92,7 +86,6 @@ aws sts get-caller-identity
 
 If you see your AWS account ID and username printed in the terminal, your credentials are working correctly and you're ready to move on.
 
----
 
 ### ✅ Step 4 — Install Python
 
@@ -118,7 +111,7 @@ If it shows `Python 3.8` or higher, skip straight to Step 5.
 
 ### ✅ Step 5 — Install the Pulumi CLI and log in
 
-Pulumi is the tool that reads the code in this template and creates the real AWS resources. It also needs to store a record of what it has deployed — this is called "state" — so it knows what exists and what needs to change next time you run it.
+Pulumi is the tool that reads the code in this template and creates the real AWS resources. It also needs to store a record of what it has deployed this is called "state" — so it knows what exists and what needs to change next time you run it.
 
 **Install it:**
 
@@ -134,7 +127,7 @@ Pulumi is the tool that reads the code in this template and creates the real AWS
 pulumi login
 ```
 
-This opens your browser and asks you to create a free account at [app.pulumi.com](https://app.pulumi.com). Pulumi uses this account to store your stack state remotely — a record of every resource it has deployed on your behalf.
+This opens your browser and asks you to create a free account at [app.pulumi.com](https://app.pulumi.com). Pulumi uses this account to store your stack state remotely a record of every resource it has deployed on your behalf.
 
 This is a separate login from AWS. Think of it this way:
 - **AWS login** (`aws configure`) = permission to create resources in your AWS account
@@ -144,8 +137,6 @@ You need both.
 
 > 💡 Prefer not to use Pulumi Cloud? You can store state on your local machine instead:
 > `pulumi login --local`
-
----
 
 ## Deploy the template
 
@@ -184,7 +175,7 @@ pulumi config set alert_email you@yourdomain.com
 
 Replace `50` with your monthly budget limit in USD, and `you@yourdomain.com` with your real email address.
 
-**You do not need to edit `__main__.py` at all.** These three commands are the only customisation required. Pulumi writes your values into `Pulumi.dev.yaml` automatically — the file is created for you and looks like this:
+**You do not need to edit `__main__.py` at all.** These three commands are the only customisation required. Pulumi writes your values into `Pulumi.dev.yaml` automatically the file is created for you and looks like this:
 
 ```yaml
 config:
@@ -231,20 +222,15 @@ Outputs:
   next_step:      ⚠️ Check your inbox and click 'Confirm subscription' to activate your alerts.
   sns_topic_arn:  arn:aws:sns:us-east-1:123456789:pulumi-budget-alert-billing-alerts
 ```
-
----
-
-## ⚠️ Critical last step — confirm your email
+## ⚠️ Critical last step  confirm your email
 
 After deploying, AWS will send a confirmation email to the address you provided.
 
 **You must open that email and click "Confirm subscription."**
 
-Until you do this, everything is set up correctly but your inbox will not receive the alerts. AWS requires this as a security measure — they won't send emails to addresses that haven't explicitly opted in.
+Until you do this, everything is set up correctly but your inbox will not receive the alerts. AWS requires this as a security measure they won't send emails to addresses that haven't explicitly opted in.
 
 If you don't see the email within a few minutes, check your spam folder.
-
----
 
 ## How it works under the hood
 
@@ -273,7 +259,6 @@ Three alert thresholds are configured by default:
 | `Pulumi.dev.yaml` | Your config values — auto-created when you run `pulumi config set` |
 | `requirements.txt` | The Python libraries this project depends on |
 
----
 
 ## Tear it down
 
@@ -284,8 +269,6 @@ pulumi destroy
 ```
 
 This removes all the AWS resources from your account. Your `Pulumi.dev.yaml` and stack record stay, but nothing is running in AWS.
-
----
 
 ## Customise it
 
@@ -304,8 +287,6 @@ pulumi up
 **Add a second email recipient:** Open `__main__.py` and duplicate the `aws.sns.TopicSubscription` block with a different email address.
 
 **Add more alert thresholds:** Duplicate one of the `BudgetNotificationArgs` blocks in `__main__.py` and change the `threshold` value to whatever percentage you want.
-
----
 
 ## Common errors and fixes
 
